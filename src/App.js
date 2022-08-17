@@ -7,7 +7,9 @@ import StylesProvider from '@mui/styles/StylesProvider';
 import jssPreset from '@mui/styles/jssPreset';
 import { ThemeProvider, StyledEngineProvider, createTheme } from "@mui/material/styles";
 import makeStyles from '@mui/styles/makeStyles';
-import AddElements from "./components/addElements"
+import AddElements from "./components/index"
+import EndUserLink from './components/endUserLink';
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 
 const theme = createTheme(adaptV4Theme({
   typography: {
@@ -45,8 +47,14 @@ function App() {
     <StyledEngineProvider injectFirst>
     <ThemeProvider theme={theme}>
     <div >
-    <AddElements></AddElements>
-    </div>   
+    <BrowserRouter>
+          <Switch>
+            <Route path="/" component={AddElements} exact />
+            <Route path="/enduserlink" component={EndUserLink} exact />
+         
+          </Switch>
+        </BrowserRouter>
+        </div>   
     </ThemeProvider>
     </StyledEngineProvider>
   );

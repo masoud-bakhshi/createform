@@ -21,7 +21,7 @@ import Password from "./password";
 import Number from "./number"
 import Email from "./email";
 import Phone from "./phone"
-
+import { useLocation } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   appBar: {
     position: "fixed",
@@ -36,7 +36,12 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="left" ref={ref} {...props} />;
 });
 
-const EndUserElements = ({open , setOpen , inputElements}) => {
+const EndUserLink = () => {
+    const location = useLocation();
+    const [inputElements, setInputElements] = useState(
+      location.state ? location.state.inputElements : inputElements
+    );
+
   const username="masoud.main@gmail.com"
   const [restApp, setResetApp] = useState(true);
   //*********************************** */
@@ -66,13 +71,11 @@ const EndUserElements = ({open , setOpen , inputElements}) => {
     analytics: "true",
     username: username,
   });
-  const handleClose = () => {
-    setOpen(false);
-  };
+
   useEffect(() => {
     if (step === "finish") {
       setResetApp(true);
-      setOpen(false);
+     
       setStep("Welcome");
      
      
@@ -86,29 +89,13 @@ const EndUserElements = ({open , setOpen , inputElements}) => {
   }, [elementindex]);
   return (
     <div>
-        <Dialog
-        fullScreen
-        open={open}
-        onClose={handleClose}
-        TransitionComponent={Transition}
-      >
-        <AppBar className={classes.appBar}>
-          <Toolbar>
-            <IconButton
-              edge="start"
-              color="inherit"
-              onClick={handleClose}
-              aria-label="close"
-              size="large">
-              <CloseIcon />
-            </IconButton>
+       
            
-       <Typography variant="h6" className={classes.title}>
+       {/* <Typography variant="h6" className={classes.title}>
         Link of your Forms: http://www.devcodebase.com/forms/53sef3sef4sf4s8f43s4fs3f
-      </Typography>
+      </Typography> */}
    
-          </Toolbar>
-        </AppBar>
+        
         <div style={{
             marginTop: "5px",
             marginBottom: "5px",
@@ -265,9 +252,9 @@ const EndUserElements = ({open , setOpen , inputElements}) => {
           ></Phone>
         )}
         </div>
-      </Dialog>
+      
     </div>
   )
 }
 
-export default EndUserElements
+export default EndUserLink
