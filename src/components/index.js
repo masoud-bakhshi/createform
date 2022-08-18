@@ -12,7 +12,7 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import TreeView from "@mui/lab/TreeView";
 import TreeItem from "@mui/lab/TreeItem";
 import { Route, Switch, Redirect, useHistory } from "react-router-dom";
-
+import DataTableDialog from "./table";
 const useStyles = makeStyles((theme) => ({
   root: {
     height: "100vh",
@@ -68,9 +68,17 @@ export default function AddElements() {
   const classes = useStyles();
   const [inputElements, setInputElements] = useState([]);
   const [open, setOpen] = useState(false);
+  const [openTable, setOpenTable] = useState(false);
   const [openAdmin, setOpenAdmin] = useState(false);
   const [expanded, setExpanded] = React.useState([]);
   const [selected, setSelected] = React.useState([]);
+  const [tabData, setTabData] = useState({
+    column1: "column1",
+    username: "masoud.main@gmail.com",
+    createdAt: "test",
+    appname: "test",
+    id: "test",
+  });
   let history = useHistory();
   const handleToggle = (event: React.SyntheticEvent, nodeIds: string[]) => {
     setExpanded(nodeIds);
@@ -123,7 +131,7 @@ export default function AddElements() {
             setOpenAdmin(true);
           }}
         >
-          add Page
+         Add Form
         </Button>
       </div>
       <Grid container component="main" className={classes.root}>
@@ -191,11 +199,25 @@ export default function AddElements() {
                     <TreeItem nodeId="1" label="Forms">
                       <TreeItem
                         nodeId="2"
-                        label="First Form"
+                        label="1.Form"
+                     
+                      >
+                         <TreeItem
+                        nodeId="3"
+                        label="Form Dialog"
                         onClick={() => {
                           setOpen(true);
                         }}
-                      >
+                       
+                      ></TreeItem>
+                         <TreeItem
+                        nodeId="4"
+                        label="Form's Data"
+                        onClick={() => {
+                          setOpenTable(true);
+                        }}
+                       
+                      ></TreeItem>
                          <TreeItem
                         nodeId="5"
                         label="http://www.devcodebase.com/forms/53sef3sef4sf4s8f43s4fs3f"
@@ -209,21 +231,9 @@ export default function AddElements() {
                       >
 
                       </TreeItem>
+                   
                       </TreeItem>
-                      <TreeItem
-                        nodeId="3"
-                        label="Second Form"
-                        onClick={() => {
-                          setOpen(true);
-                        }}
-                      />
-                      <TreeItem
-                        nodeId="4"
-                        label="Third Form"
-                        onClick={() => {
-                          setOpen(true);
-                        }}
-                      />
+                    
                     </TreeItem>
                     {/* <TreeItem nodeId="5" label="Documents">
           <TreeItem nodeId="6" label="MUI">
@@ -249,6 +259,10 @@ export default function AddElements() {
                   inputElements={inputElements}
                   setInputElements={setInputElements}
                 ></AdminElementsDialog>
+                <DataTableDialog   open={openTable}
+                  setOpen={setOpenTable}
+                  tabData={tabData}
+                ></DataTableDialog>
               </div>
             </div>
           </Slide>

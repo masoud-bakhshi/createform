@@ -21,6 +21,7 @@ import Password from "./password";
 import Number from "./number"
 import Email from "./email";
 import Phone from "./phone"
+import Finished from "./finished";
 import { useLocation } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -250,6 +251,19 @@ const EndUserLink = () => {
             setElementindex ={setElementindex}
 
           ></Phone>
+          
+        )}
+          {step === "Finished" && (
+          <Finished
+            setStep={setStep}
+            setPayload={setPayload}
+            payload={payload}
+            elementindex={elementindex}
+            inputElements={inputElements}
+            setElementindex ={setElementindex}
+
+          ></Finished>
+          
         )}
         </div>
       

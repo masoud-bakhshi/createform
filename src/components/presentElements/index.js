@@ -15,6 +15,7 @@ import Password from "./password";
 import Number from "./number"
 import Email from "./email";
 import Phone from "./phone"
+import Finished from "./finished";
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -237,6 +238,16 @@ const PeresentElements = ({open , setOpen,inputElements }) => {
             setElementindex ={setElementindex}
 
           ></Phone>}
+            {  inputElements[index].step === "Finished" && 
+          <Finished
+            setStep={setStep}
+            setPayload={setPayload}
+            payload={payload}
+            elementindex={index}
+            inputElements={inputElements}
+            setElementindex ={setElementindex}
+
+          ></Finished>}
       </div>
         )})}
         </div>

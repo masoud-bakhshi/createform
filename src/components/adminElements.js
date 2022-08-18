@@ -113,6 +113,7 @@ export default function AdminElements({ inputElements, setInputElements }) {
     ]);
     setStepIdElements(stepIdElements + 1);
     setWelcomeText("");
+    setFinishedText("");
     setQuestionText("");
     setElementName("");
     setElementOption("");
@@ -120,11 +121,13 @@ export default function AdminElements({ inputElements, setInputElements }) {
   };
   const clearOptions = () => {
     setWelcomeText("");
+    setFinishedText("");
     setQuestionText("");
     setElementName("");
     setElementOption("");
     setOptionJson([]);
   };
+  const [finishedText, setFinishedText] = useState("");
   const [welcomeText, setWelcomeText] = useState("");
   const [questionText, setQuestionText] = useState("");
   const [stepIdElements, setStepIdElements] = useState(0);
@@ -200,7 +203,7 @@ export default function AdminElements({ inputElements, setInputElements }) {
                   />
                 </div>
 
-                {elementChoice !== "Welcome" && (
+                { elementChoice !== "Finished" &&(
                   <div
                     style={{
                       marginTop: "8px",
@@ -244,7 +247,7 @@ export default function AdminElements({ inputElements, setInputElements }) {
                     />
                   </div>
                 )}
-                {elementChoice !== "Welcome" && (
+                {elementChoice !== "Welcome" && elementChoice !== "Finished" && (
                   <div
                     style={{
                       marginTop: "8px",
@@ -256,6 +259,29 @@ export default function AdminElements({ inputElements, setInputElements }) {
                     <TextField
                       id="outlined-multiline-flexible"
                       label="Question Text"
+                      multiline
+                      rows={4}
+                      value={questionText}
+                      //   onChange={handleChange}
+                      onChange={(e) => {
+                        setQuestionText(e.target.value);
+                      }}
+                      fullWidth
+                    />
+                  </div>
+                )}
+                    {elementChoice == "Finished" && (
+                  <div
+                    style={{
+                      marginTop: "8px",
+                      marginBottom: "8px",
+                      marginRight: "8px",
+                      marginLeft: "8px",
+                    }}
+                  >
+                    <TextField
+                      id="outlined-multiline-flexible"
+                      label="Finished Text"
                       multiline
                       rows={4}
                       value={questionText}
@@ -439,4 +465,5 @@ const inputElementOption = [
   { stepId: "10", label: "Country" },
   { stepId: "11", label: "Password" },
   { stepId: "12", label: "Number" },
+  { stepId: "13", label: "Finished" },
 ];
