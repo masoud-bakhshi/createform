@@ -47,7 +47,7 @@ function App() {
     <StyledEngineProvider injectFirst>
     <ThemeProvider theme={theme}>
     <div >
-    <BrowserRouter basename="/6092b28a8fda4729541cf5a5/form/">
+    <BrowserRouter >
           <Switch>
             <Route path="/" component={AddElements} exact />
             <Route path="/enduserlink" component={EndUserLink} exact />
