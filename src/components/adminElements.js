@@ -127,6 +127,7 @@ export default function AdminElements({ inputElements, setInputElements }) {
     setElementOption("");
     setOptionJson([]);
   };
+  const saveForm = () => {};
   const [finishedText, setFinishedText] = useState("");
   const [welcomeText, setWelcomeText] = useState("");
   const [questionText, setQuestionText] = useState("");
@@ -203,7 +204,7 @@ export default function AdminElements({ inputElements, setInputElements }) {
                   />
                 </div>
 
-                { elementChoice !== "Finished" &&(
+                {elementChoice !== "Finished" && (
                   <div
                     style={{
                       marginTop: "8px",
@@ -270,7 +271,7 @@ export default function AdminElements({ inputElements, setInputElements }) {
                     />
                   </div>
                 )}
-                    {elementChoice == "Finished" && (
+                {elementChoice == "Finished" && (
                   <div
                     style={{
                       marginTop: "8px",
@@ -376,7 +377,7 @@ export default function AdminElements({ inputElements, setInputElements }) {
                 <Button
                   type="button"
                   fullWidth
-                  variant="contained"
+                  variant="outlined"
                   color="primary"
                   disabled={submitted}
                   className={classes.submit}
@@ -385,10 +386,23 @@ export default function AdminElements({ inputElements, setInputElements }) {
                 >
                   Add Element
                 </Button>
+            
                 <Button
                   type="button"
                   fullWidth
-                  variant="outlined"
+                  variant="contained"
+                  color="primary"
+                  disabled={submitted}
+                  className={classes.submit}
+                  onClick={saveForm}
+                  // endIcon  ={<FastForwardIcon />}
+                >
+                  Save Form
+                </Button>
+                <Button
+                  type="button"
+                  fullWidth
+                  variant="text"
                   color="primary"
                   // disabled={submitted}
                   className={classes.submit}

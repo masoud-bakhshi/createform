@@ -234,6 +234,42 @@ export default function AddElements() {
                    
                       </TreeItem>
                     
+                      <TreeItem
+                        nodeId="6"
+                        label="2.Form"
+                     
+                      >
+                         <TreeItem
+                        nodeId="7"
+                        label="Form Dialog"
+                        onClick={() => {
+                          setOpen(true);
+                        }}
+                       
+                      ></TreeItem>
+                         <TreeItem
+                        nodeId="8"
+                        label="Form's Data"
+                        onClick={() => {
+                         
+                        }}
+                       
+                      ></TreeItem>
+                         <TreeItem
+                        nodeId="9"
+                        label="http://www.devcodebase.com/forms/5s65c6s5dc16s531c3s1c3s1dc3sc"
+                        onClick={() => {
+                          // history.push({
+                          //   pathname: "/enduserlink",
+                          //   //search: "?" + username,
+                          //   state: { inputElements: inputElements },
+                          // });
+                        }}
+                      >
+
+                      </TreeItem>
+                   
+                      </TreeItem>
                     </TreeItem>
                     {/* <TreeItem nodeId="5" label="Documents">
           <TreeItem nodeId="6" label="MUI">
