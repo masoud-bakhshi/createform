@@ -15,6 +15,7 @@ import FastRewindIcon from "@mui/icons-material/FastRewind";
 import Autocomplete from "@mui/material/Autocomplete";
 import Select from "./selectTest";
 import PeresentElements from "./presentElements/index";
+import Axios from "axios";
 import {
   FormLabel,
   FormControl,
@@ -70,10 +71,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function AdminElements({ inputElements, setInputElements }) {
+export default function AdminElements({ inputElements, setInputElements ,setOpenAdmin}) {
   const classes = useStyles();
   const [submitted, setSubmitted] = useState(false);
   const [elementChoice, setElementChoice] = useState("Welcome");
+  const [formName, setFormName] = useState();
   // setElementindex(elementindex+1)
 
   //   const [inputElements, setInputElements] = useState([
@@ -127,7 +129,35 @@ export default function AdminElements({ inputElements, setInputElements }) {
     setElementOption("");
     setOptionJson([]);
   };
-  const saveForm = () => {};
+  const insertFormJson = async (
+    payload,
+    setResetP,
+    setLoadingS,
+    setAuthData
+  ) => {
+    try {
+      Axios.defaults.withCredentials = true;
+      // Axios.defaults.headers.common = {
+      //   Authorization: `bearer ${localStorage.getItem("token")}`,
+      // };
+      if(formName){
+      await Axios.post("http://172.20.10.2:3200/insertformjson", {username:"masoud.main@gmail.com" ,formname:formName,formjson:JSON.stringify(inputElements) })
+        .then((response) => {})
+        .catch((error) => {
+          // logoutAuth(setLoadingS, setAuthData);
+        });
+        setOpenAdmin(false)}else{
+
+        }
+  
+      // setResetP(true);
+    } catch (error) {}
+  };
+  const saveForm = () => {
+    insertFormJson()
+    console.log(inputElements)
+   
+  };
   const [finishedText, setFinishedText] = useState("");
   const [welcomeText, setWelcomeText] = useState("");
   const [questionText, setQuestionText] = useState("");
@@ -178,6 +208,27 @@ export default function AdminElements({ inputElements, setInputElements }) {
                 }}
               >
                 <div
+                    style={{
+                      marginTop: "8px",
+                      marginBottom: "8px",
+                      marginRight: "8px",
+                      marginLeft: "8px",
+                    }}
+                  >
+                    <TextField
+                      required
+                      id="outlined-required"
+                      label="Enter the form's name."
+                      require
+                      inputRef={(input) => input?.focus()}
+                      value={formName}
+                      onChange={(e) => {
+                        setFormName(e.target.value);
+                      }}
+                      fullWidth
+                    />
+                  </div>
+                <div
                   style={{
                     marginTop: "8px",
                     marginBottom: "8px",
@@ -216,7 +267,7 @@ export default function AdminElements({ inputElements, setInputElements }) {
                     <TextField
                       required
                       id="outlined-required"
-                      label="Name"
+                      label="Column's Name"
                       value={elementName}
                       onChange={(e) => {
                         setElementName(e.target.value);
@@ -386,7 +437,7 @@ export default function AdminElements({ inputElements, setInputElements }) {
                 >
                   Add Element
                 </Button>
-            
+                
                 <Button
                   type="button"
                   fullWidth

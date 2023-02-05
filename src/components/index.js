@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
+import Axios from "axios";
 import makeStyles from "@mui/styles/makeStyles";
 import TextField from "@mui/material/TextField";
 import Slide from "@mui/material/Slide";
@@ -13,6 +14,7 @@ import TreeView from "@mui/lab/TreeView";
 import TreeItem from "@mui/lab/TreeItem";
 import { Route, Switch, Redirect, useHistory } from "react-router-dom";
 import DataTableDialog from "./table";
+import FormTree from "./formTree/index.js"
 const useStyles = makeStyles((theme) => ({
   root: {
     height: "100vh",
@@ -67,11 +69,13 @@ const useStyles = makeStyles((theme) => ({
 export default function AddElements() {
   const classes = useStyles();
   const [inputElements, setInputElements] = useState([]);
-  const [open, setOpen] = useState(false);
+  const [openPreview, setOpenPreview] = useState(false);
   const [openTable, setOpenTable] = useState(false);
   const [openAdmin, setOpenAdmin] = useState(false);
   const [expanded, setExpanded] = React.useState([]);
   const [selected, setSelected] = React.useState([]);
+  const [formJsonsData, setFormJsonsData] = React.useState();
+  const [formJsonData, setFormJsonData] = React.useState();
   const [tabData, setTabData] = useState({
     column1: "column1",
     username: "masoud.main@gmail.com",
@@ -101,6 +105,41 @@ export default function AddElements() {
         : []
     );
   };
+
+    const getuserFormJsonsTree = async (
+       id
+      ) => {
+        try {
+           
+          Axios.defaults.withCredentials = true;
+         
+      
+                Axios.get("http://172.20.10.2:3200/getallformjson" + "?id=" + id)
+                  .then((response) => {
+                    if (response.data) {
+                        // console.log("here2");
+                     console.log(response.data.data);
+                     setFormJsonsData(response.data.data)
+                    //  setInputElements(JSON.parse(response.data.data[0].formjson))
+                    }
+                  })
+                  .catch((error) => {
+                    console.log("here3");
+                  });
+            
+            
+        } catch (error) {}
+      };
+
+    // const [inputElements, setInputElements] = useState(
+        
+    //   );
+  
+      useEffect(() => {
+// console.log(id);
+getuserFormJsonsTree("masoud.main@gmail.com")
+     
+      }, []);
   return (
     <div>
       <div dir="center" className={classes.halfTop}>
@@ -134,161 +173,16 @@ export default function AddElements() {
          Add Form
         </Button>
       </div>
-      <Grid container component="main" className={classes.root}>
-        <CssBaseline />
-
-        <Grid
-          item
-          xs={12}
-          sm={8}
-          md={5}
-          component={Paper}
-          elevation={6}
-          square
-          className={classes.halfLeft}
-        >
-          <Slide direction="up" in={true} mountOnEnter unmountOnExit>
-            <div className={classes.paper}>
-              {/* <div style={{ direction: "ltr" }}>
-          
-          <Typography
-            component="h1"
-            variant="h6"
-            className={classes.type}
-            style={{ direction: "ltr" }}
-          >
-          
-            </Typography>
-          </div> */}
-              <div
-                style={
-                  {
-                    // marginTop: "5px",
-                    // marginBottom: "5px",
-                    // marginRight: "5px",
-                    // marginLeft: "5px",
-                  }
-                }
-              >
-                <Box
-                  sx={{
-                    height: 270,
-                    flexGrow: 1,
-                    maxWidth: 400,
-                    overflowY: "auto",
-                  }}
-                >
-                  <Box sx={{ mb: 1 }}>
-                    <Button onClick={handleExpandClick}>
-                      {expanded.length === 0 ? "Expand all" : "Collapse all"}
-                    </Button>
-                    <Button onClick={handleSelectClick}>
-                      {selected.length === 0 ? "Select all" : "Unselect all"}
-                    </Button>
-                  </Box>
-                  <TreeView
-                    aria-label="controlled"
-                    defaultCollapseIcon={<ExpandMoreIcon />}
-                    defaultExpandIcon={<ChevronRightIcon />}
-                    expanded={expanded}
-                    selected={selected}
-                    onNodeToggle={handleToggle}
-                    onNodeSelect={handleSelect}
-                    multiSelect
-                  >
-                    <TreeItem nodeId="1" label="Forms">
-                      <TreeItem
-                        nodeId="2"
-                        label="1.Form"
-                     
-                      >
-                         <TreeItem
-                        nodeId="3"
-                        label="Form Dialog"
-                        onClick={() => {
-                          setOpen(true);
-                        }}
-                       
-                      ></TreeItem>
-                         <TreeItem
-                        nodeId="4"
-                        label="Form's Data"
-                        onClick={() => {
-                          setOpenTable(true);
-                        }}
-                       
-                      ></TreeItem>
-                         <TreeItem
-                        nodeId="5"
-                        label="http://www.devcodebase.com/forms/53sef3sef4sf4s8f43s4fs3f"
-                        onClick={() => {
-                          history.push({
-                            pathname: "/enduserlink",
-                            //search: "?" + username,
-                            state: { inputElements: inputElements },
-                          });
-                        }}
-                      >
-
-                      </TreeItem>
-                   
-                      </TreeItem>
-                    
-                      <TreeItem
-                        nodeId="6"
-                        label="2.Form"
-                     
-                      >
-                         <TreeItem
-                        nodeId="7"
-                        label="Form Dialog"
-                        onClick={() => {
-                          setOpen(true);
-                        }}
-                       
-                      ></TreeItem>
-                         <TreeItem
-                        nodeId="8"
-                        label="Form's Data"
-                        onClick={() => {
-                         
-                        }}
-                       
-                      ></TreeItem>
-                         <TreeItem
-                        nodeId="9"
-                        label="http://www.devcodebase.com/forms/5s65c6s5dc16s531c3s1c3s1dc3sc"
-                        onClick={() => {
-                          // history.push({
-                          //   pathname: "/enduserlink",
-                          //   //search: "?" + username,
-                          //   state: { inputElements: inputElements },
-                          // });
-                        }}
-                      >
-
-                      </TreeItem>
-                   
-                      </TreeItem>
-                    </TreeItem>
-                    {/* <TreeItem nodeId="5" label="Documents">
-          <TreeItem nodeId="6" label="MUI">
-            <TreeItem nodeId="7" label="src">
-              <TreeItem nodeId="8" label="index.js" />
-              <TreeItem nodeId="9" label="tree-view.js" />
-            </TreeItem>
-          </TreeItem>
-        </TreeItem> */}
-                  </TreeView>
-                </Box>
-
-                {open && (
+   {formJsonsData ? <FormTree formJsonsData={formJsonsData} setFormJsonData={setFormJsonData} setOpenPreview={setOpenPreview}></FormTree> : null}
+   
+                 {openPreview && formJsonData ? 
                   <EndUserElements
-                    open={open}
-                    setOpen={setOpen}
-                    inputElements={inputElements}
-                  ></EndUserElements>
-                )}
+                    open={openPreview}
+                    setOpen={setOpenPreview}
+                    inputElements={formJsonData}
+                  ></EndUserElements> 
+                  : null }
+              
                 <AdminElementsDialog
                   openAdmin={openAdmin}
                   setOpenAdmin={setOpenAdmin}
@@ -299,13 +193,6 @@ export default function AddElements() {
                   setOpen={setOpenTable}
                   tabData={tabData}
                 ></DataTableDialog>
-              </div>
-            </div>
-          </Slide>
-        </Grid>
-
-        <Grid item xs={false} sm={4} md={7} className={classes.image} />
-      </Grid>
     </div>
   );
 }

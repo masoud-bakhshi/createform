@@ -74,6 +74,7 @@ const AdminElementsDialog = ({
           <AdminElements
             inputElements={inputElements}
             setInputElements={setInputElements}
+            setOpenAdmin={setOpenAdmin}
           ></AdminElements>
          
         </div>

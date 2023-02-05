@@ -9,6 +9,7 @@ import { ThemeProvider, StyledEngineProvider, createTheme } from "@mui/material/
 import makeStyles from '@mui/styles/makeStyles';
 import AddElements from "./components/index"
 import EndUserLink from './components/endUserLink';
+import EndUserForm from "./components/endUserForm/index"
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 
 const theme = createTheme(adaptV4Theme({
@@ -51,7 +52,7 @@ function App() {
           <Switch>
             <Route path="/" component={AddElements} exact />
             <Route path="/enduserlink" component={EndUserLink} exact />
-         
+            <Route path="/form/:id" component={EndUserForm} exact />
           </Switch>
         </BrowserRouter>
         </div>   
