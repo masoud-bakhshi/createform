@@ -10,10 +10,8 @@ import {
 import makeStyles from "@mui/styles/makeStyles";
 import TextField from "@mui/material/TextField";
 import Slide from "@mui/material/Slide";
-import FastForwardIcon from "@mui/icons-material/FastForward";
-import FastRewindIcon from "@mui/icons-material/FastRewind";
 import Autocomplete from "@mui/material/Autocomplete";
-import PeresentElements from "./presentElements/index";
+import PeresentElements from "../presentElements/index";
 import Axios from "axios";
 import {
   FormLabel,

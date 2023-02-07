@@ -1,31 +1,23 @@
 import React, { useEffect, useState } from "react";
 import makeStyles from '@mui/styles/makeStyles';
-import Dialog from "@mui/material/Dialog";
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import CloseIcon from "@mui/icons-material/Close";
 import Slide from '@mui/material/Slide';
-// import Slide from "@mui/material/Slide";
-import TextFieldStep from "../textFieldStep";
-import SwitchStep from "../switchStep";
-import MultiTextFieldStep from "../multiTextFieldStep";
-import RadioStep from "../radioStep";
-import CheckboxStep from "../checkboxStep";
-import AutocompleteStep from "../autocompleteStep";
-import Welcome from "../welcome"
-import DatePickerStep from "../datePickerStep"
-import Country from "../country";
-import Password from "../password";
-import Number from "../number"
-import Email from "../email";
-import Phone from "../phone"
-import Finished from "../finished";
-import Description from "../description"
-import SaveForm from "../saveForm"
+import TextFieldStep from "../elements/textFieldStep";
+import SwitchStep from "../elements/switchStep";
+import MultiTextFieldStep from "../elements/multiTextFieldStep";
+import RadioStep from "../elements/radioStep";
+import CheckboxStep from "../elements/checkboxStep";
+import AutocompleteStep from "../elements/autocompleteStep";
+import Welcome from "../elements/welcome"
+import DatePickerStep from "../elements/datePickerStep"
+import Country from "../elements/country";
+import Password from "../elements/password";
+import Number from "../elements/number"
+import Email from "../elements/email";
+import Phone from "../elements/phone"
+import Finished from "../elements/finished";
+import Description from "../elements/description"
+import SaveForm from "../elements/saveForm"
 
-import { useLocation } from "react-router-dom";
 import { useParams } from 'react-router-dom';
 import Axios from "axios";
 const useStyles = makeStyles((theme) => ({

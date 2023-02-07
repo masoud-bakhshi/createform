@@ -1,13 +1,13 @@
 import React, { useState,useEffect } from "react";
 import Axios from "axios";
 import makeStyles from "@mui/styles/makeStyles";
-import EndUserElements from "./endUserElements";
+import EndUserElements from "./endUserForm/endUserElements";
 import { Button } from "@mui/material";
-import AdminElementsDialog from "./adminElementsDialog";
+import AdminElementsDialog from "./admin/adminElementsDialog";
 // import Button from '@mui/material/Button';
 import { useHistory } from "react-router-dom";
 // import DataTableDialog from "./table";
-import FormTree from "./formTree/index.js"
+import FormTree from "./formTree/index"
 const useStyles = makeStyles((theme) => ({
   root: {
     height: "100vh",

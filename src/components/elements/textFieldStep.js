@@ -120,17 +120,14 @@ export default function TextFieldStep({
                 onClick={() => {
                   setPayload({
                     ...payload,
-                   
-                    [inputElements[elementindex].elementName] :eValue,
-                     
-                  }
-                  );
+
+                    [inputElements[elementindex].elementName]: eValue,
+                  });
                   console.log(payload);
-                  setEValue("")
+                  setEValue("");
                   setElementindex(elementindex + 1);
                 }}
                 // endIcon  ={<FastForwardIcon />}
-                
               >
                 Next
               </Button>
@@ -143,8 +140,7 @@ export default function TextFieldStep({
                 className={classes.submit}
                 onClick={() => {
                   // setStep(inputElements[elementindex-2].step);
-                 
-                  
+
                   setElementindex(elementindex - 1);
                 }}
                 // startIcon={<FastRewindIcon />}
