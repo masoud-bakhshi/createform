@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Button, CssBaseline, Paper, Grid, Typography } from "@mui/material";
 import makeStyles from "@mui/styles/makeStyles";
-import TextField from "@mui/material/TextField";
+import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import Slide from "@mui/material/Slide";
-import FastForwardIcon from "@mui/icons-material/FastForward";
-import FastRewindIcon from "@mui/icons-material/FastRewind";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     height: "100vh",
@@ -21,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   halfLeft: {
     display: "flex",
     flexDirection: "column",
-    alignItems: "center",
+    // alignItems: "center",
     justifyContent: "center",
     background: "#fafafa",
   },
@@ -49,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function TextFieldStep({
+export default function Description({
   setStep,
   setPayload,
   payload,
@@ -59,8 +58,10 @@ export default function TextFieldStep({
 }) {
   const classes = useStyles();
   const [submitted, setSubmitted] = useState(false);
-  // setElementindex(elementindex+1)
-  const [eValue, setEValue] = useState("");
+  const nextStep = () => {
+    setStep("second");
+  };
+  // elementindex = elementindex+1;
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -80,13 +81,14 @@ export default function TextFieldStep({
           <div className={classes.paper}>
             <div style={{ direction: "ltr" }}>
               <Typography component="h1" variant="h5" className={classes.type}>
-                Q.{inputElements[elementindex].stepId}
+                Description
               </Typography>
               <Typography
                 component="h1"
                 variant="h6"
                 className={classes.type}
                 style={{ direction: "ltr" }}
+                
               >
                 {inputElements[elementindex].questionText}
               </Typography>
@@ -99,17 +101,6 @@ export default function TextFieldStep({
                 marginLeft: "5px",
               }}
             >
-              <TextField
-                required
-                id="outlined-required"
-                label="Required"
-                defaultValue="Hello World"
-                fullWidth
-                value={eValue}
-                onChange={(e) => {
-                  setEValue(e.target.value);
-                }}
-              />
               <Button
                 type="button"
                 fullWidth
@@ -118,19 +109,9 @@ export default function TextFieldStep({
                 disabled={submitted}
                 className={classes.submit}
                 onClick={() => {
-                  setPayload({
-                    ...payload,
-                   
-                    [inputElements[elementindex].elementName] :eValue,
-                     
-                  }
-                  );
-                  console.log(payload);
-                  setEValue("")
                   setElementindex(elementindex + 1);
                 }}
                 // endIcon  ={<FastForwardIcon />}
-                
               >
                 Next
               </Button>
@@ -143,8 +124,7 @@ export default function TextFieldStep({
                 className={classes.submit}
                 onClick={() => {
                   // setStep(inputElements[elementindex-2].step);
-                 
-                  
+
                   setElementindex(elementindex - 1);
                 }}
                 // startIcon={<FastRewindIcon />}

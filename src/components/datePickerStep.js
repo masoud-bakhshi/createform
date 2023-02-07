@@ -116,6 +116,13 @@ export default function DatePickerStep({ setStep, setPayload, payload,elementind
                 disabled={submitted}
                 className={classes.submit}
                 onClick={() => {
+                  setPayload({
+                    ...payload,
+                   
+                    [inputElements[elementindex].elementName] :value,
+                     
+                  }
+                  );
                   setElementindex(elementindex+1)
                 }}
               >

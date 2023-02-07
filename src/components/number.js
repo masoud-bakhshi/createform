@@ -51,9 +51,9 @@ const useStyles = makeStyles((theme) => ({
 export default function Number({ setStep, setPayload, payload ,elementindex,setElementindex,inputElements}) {
   const classes = useStyles();
   const [submitted, setSubmitted] = useState(false);
-  const nextStep = () => {
-    setStep("second");
-  };
+  const [eValue, setEValue] = useState("");
+
+ 
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -95,6 +95,10 @@ export default function Number({ setStep, setPayload, payload ,elementindex,setE
        id="outlined-number"
        label="Number"
        type="number"
+       value={eValue}
+       onChange={(e) => {
+         setEValue(e.target.value);
+       }}
        InputLabelProps={{
          shrink: true,
        }}
@@ -109,6 +113,13 @@ export default function Number({ setStep, setPayload, payload ,elementindex,setE
                 disabled={submitted}
                 className={classes.submit}
                 onClick={() => {
+                  setPayload({
+                    ...payload,
+                   
+                    [inputElements[elementindex].elementName] :eValue,
+                     
+                  }
+                  );
                   setElementindex(elementindex+1)
                 }}
               >

@@ -250,7 +250,8 @@ export default function FormTree({ formJsonsData , setFormJsonData , setOpenPrev
             >
               <div style={{ direction: isRtl() ? "rtl" : "ltr" }}>
                 <Typography variant="overline" display="block" gutterBottom>
-                  {/* {t("dashboard.my_app.in_this_section_you_can_create")} */}
+                The first step is to create a form, and then you can send the form's link to anyone.
+
                 </Typography>
               </div>
               <Typography
@@ -277,6 +278,12 @@ export default function FormTree({ formJsonsData , setFormJsonData , setOpenPrev
               </Typography>
             </div>
           </TreeView>
+          {/* <div style={{ direction: "ltr" }}>
+                <Typography variant="overline" display="block" gutterBottom>
+                The first step is to create a form, and then you can send the form's link to anyone.
+                </Typography>
+              </div> */}
+         
         </div>
       </Grid>
       <Grid item xs={false} sm={4} md={7} className={classes.image} />

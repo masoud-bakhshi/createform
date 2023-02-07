@@ -60,18 +60,25 @@ const useStyles = makeStyles((theme) => ({
 export default function SwitchStep({ setStep, payload, setPayload,elementindex,setElementindex ,inputElements}) {
   const classes = useStyles();
   const [submitted, setSubmitted] = useState(false);
-  const [aswitch, setAswitch] = useState(true);
+  const [aswitch, setAswitch] = useState(false);
   const [state, setState] = React.useState({
-    gilad: true,
-    jason: false,
-    antoine: true,
+    require: true,
   });
+  // const [state, setState] = React.useState({
+  //   gilad: true,
+  //   jason: false,
+  //   antoine: true,
+  // });
   // const { setAuthData, setLoadingS } = useContext(multiStepContext);
 
   const handleChange = (event) => {
-    setPayload({ ...payload, analytics: aswitch ? "false" : "true" });
-    setAswitch(!aswitch);
+    // setPayload({ ...payload, analytics: aswitch ? "false" : "true" });
+    console.log(aswitch);
+    setAswitch(event.target.checked);
     setState({ ...state, [event.target.name]: event.target.checked });
+    console.log(aswitch);
+    // console.log(event.target.checked);
+    // console.log(state);
   };
 
   const handleIncludeApp = () => {
@@ -79,9 +86,7 @@ export default function SwitchStep({ setStep, payload, setPayload,elementindex,s
       // manageAxio.handleIncludeApp(payload, setStep, setLoadingS, setAuthData);
     } catch (error) {}
   };
-  const nextStep = () => {
-    handleIncludeApp();
-  };
+  
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -136,7 +141,7 @@ export default function SwitchStep({ setStep, payload, setPayload,elementindex,s
                         <Switch
                           checked={state.gilad}
                           onChange={handleChange}
-                          name="gilad"
+                          // name="gilad"
                           color="primary"
                         />
                       }
@@ -154,6 +159,13 @@ export default function SwitchStep({ setStep, payload, setPayload,elementindex,s
                 disabled={submitted}
                 className={classes.submit}
                 onClick={() => {
+                  setPayload({
+                    ...payload,
+                   
+                    [inputElements[elementindex].elementName] : aswitch,
+                     
+                  }
+                  );
                   setElementindex(elementindex+1)
                 }}
               >
@@ -168,6 +180,7 @@ export default function SwitchStep({ setStep, payload, setPayload,elementindex,s
                 className={classes.submit}
                 onClick={() => {
                   setElementindex(elementindex-1)
+                  // console.log(aswitch);
                 }}
               >
                 Back

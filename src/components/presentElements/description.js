@@ -6,7 +6,7 @@ import Slide from '@mui/material/Slide';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: "100vh",
+    // height: "100vh",
     direction:"ltr"
   },
   image: {
@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Finished({ setStep, setPayload, payload ,elementindex , setElementindex , inputElements}) {
+export default function Description({ setStep, setPayload, payload ,elementindex , setElementindex , inputElements}) {
   const classes = useStyles();
   const [submitted, setSubmitted] = useState(false);
   const nextStep = () => {
@@ -64,8 +64,8 @@ export default function Finished({ setStep, setPayload, payload ,elementindex , 
       <Grid
         item
         xs={12}
-        sm={8}
-        md={5}
+        sm={12}
+        md={12}
         component={Paper}
         elevation={6}
         square
@@ -75,7 +75,7 @@ export default function Finished({ setStep, setPayload, payload ,elementindex , 
         <div className={classes.paper}>
           <div style={{ direction: "ltr" }}>
           <Typography component="h1" variant="h5" className={classes.type}>
-             Finished
+          Description
             </Typography>
           <Typography
             component="h1"
@@ -86,45 +86,12 @@ export default function Finished({ setStep, setPayload, payload ,elementindex , 
             {inputElements[elementindex].questionText}
             </Typography>
           </div>
-          <div style={{
-            marginTop: "5px",
-            marginBottom: "5px",
-            marginRight: "5px",
-            marginLeft: "5px",
-          }}>
         
-        
-              <Grid item xs={12} style={{
-            marginTop: "5px",
-            marginBottom: "5px",
-            marginRight: "5px",
-            marginLeft: "5px",
-          }}>
-                        
-           
-                {/* <Button
-                type="button"
-                fullWidth
-                variant="contained"
-                color="primary"
-                // disabled={submitted}
-                className={classes.submit}
-                onClick={() => {
-                    // setStep(inputElements[elementindex].step);
-                    // setElementindex(elementindex+1)
-                    setElementindex(elementindex + 1);
-                }}
-              >
-                Save Form
-              </Button> */}
-            </Grid>
-        
-          </div>
         </div>
         </Slide>
       </Grid>
 
-      <Grid item xs={false} sm={4} md={7} className={classes.image}   />
+      {/* <Grid item xs={false} sm={4} md={7} className={classes.image}   /> */}
     </Grid>
   );
 }

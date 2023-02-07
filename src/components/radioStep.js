@@ -135,6 +135,13 @@ export default function RadioStep({ setStep, setPayload, payload,elementindex,se
                 disabled={submitted}
                 className={classes.submit}
                 onClick={() => {
+                  setPayload({
+                    ...payload,
+                   
+                    [inputElements[elementindex].elementName] :value,
+                     
+                  }
+                  );
                   setElementindex(elementindex+1)
                   }}
               >
@@ -148,6 +155,7 @@ export default function RadioStep({ setStep, setPayload, payload,elementindex,se
                 // disabled={submitted}
                 className={classes.submit}
                 onClick={() => {
+                 
                   setElementindex(elementindex-1)
                 }}
               >

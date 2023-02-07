@@ -13,7 +13,6 @@ import Slide from "@mui/material/Slide";
 import FastForwardIcon from "@mui/icons-material/FastForward";
 import FastRewindIcon from "@mui/icons-material/FastRewind";
 import Autocomplete from "@mui/material/Autocomplete";
-import Select from "./selectTest";
 import PeresentElements from "./presentElements/index";
 import Axios from "axios";
 import {
@@ -76,6 +75,8 @@ export default function AdminElements({ inputElements, setInputElements ,setOpen
   const [submitted, setSubmitted] = useState(false);
   const [elementChoice, setElementChoice] = useState("Welcome");
   const [formName, setFormName] = useState();
+  const [saveFormState, setSaveFormState] = useState(false);
+
   // setElementindex(elementindex+1)
 
   //   const [inputElements, setInputElements] = useState([
@@ -102,6 +103,29 @@ export default function AdminElements({ inputElements, setInputElements ,setOpen
   };
 
   const addElementF = () => {
+    if(elementChoice === "Welcome" || elementChoice === "Finished" || elementChoice === "Description"){
+      if(questionText !== "" ){
+        setInputElements([
+          ...inputElements,
+          {
+            stepId: stepIdElements,
+            step: elementChoice,
+            elementName: elementName,
+            questionText: questionText,
+            options: optionJson,
+            require: aswitch,
+          },
+        ]);
+        setStepIdElements(stepIdElements + 1);
+        setWelcomeText("");
+        setFinishedText("");
+        setQuestionText("");
+        setElementName("");
+        setElementOption("");
+        setOptionJson([]);
+      }
+    }
+    else if(questionText !== "" && elementName !== ""){
     setInputElements([
       ...inputElements,
       {
@@ -120,7 +144,7 @@ export default function AdminElements({ inputElements, setInputElements ,setOpen
     setElementName("");
     setElementOption("");
     setOptionJson([]);
-  };
+  }}
   const clearOptions = () => {
     setWelcomeText("");
     setFinishedText("");
@@ -154,10 +178,41 @@ export default function AdminElements({ inputElements, setInputElements ,setOpen
     } catch (error) {}
   };
   const saveForm = () => {
-    insertFormJson()
-    console.log(inputElements)
+    setInputElements([
+      ...inputElements,
+      {
+        stepId: stepIdElements,
+        step: "SaveForm",
+        elementName: "",
+        questionText: "To save your data, please press the save button.",
+        options: [],
+        require: "true",
+      },
+      {
+        stepId: stepIdElements + 1,
+        step: "Finished",
+        elementName: "",
+        questionText: "Thank you for completing the form.",
+        options: [],
+        require: "true",
+      },
+    ]);
+    setSaveFormState(true)
+    setStepIdElements(stepIdElements + 2);
+    
+    // insertFormJson()
+    // console.log(inputElements)
    
   };
+  useEffect(() => {
+    console.log(saveFormState);
+   if(saveFormState === true){
+    console.log(saveFormState);
+    insertFormJson()
+    setSaveFormState(false)
+   }
+  }, [saveFormState])
+  
   const [finishedText, setFinishedText] = useState("");
   const [welcomeText, setWelcomeText] = useState("");
   const [questionText, setQuestionText] = useState("");
@@ -219,8 +274,10 @@ export default function AdminElements({ inputElements, setInputElements ,setOpen
                       required
                       id="outlined-required"
                       label="Enter the form's name."
-                      require
-                      inputRef={(input) => input?.focus()}
+                      error={formName === ""}
+                      helperText={formName === "" ? 'Required' : ' '}
+                       require
+                      // inputRef={(input) => input?.focus()}
                       value={formName}
                       onChange={(e) => {
                         setFormName(e.target.value);
@@ -245,17 +302,17 @@ export default function AdminElements({ inputElements, setInputElements ,setOpen
                       <TextField {...params} label="Elements" />
                     )}
                     defaultValue="Welcome"
+                    error={elementChoice === ""}
+                    helperText={elementChoice === "" ? 'Required' : ' '}
+
                     onChange={(event, value) => {
                       setElementChoice(value.label);
                     }}
-                    //   onChange={()=>{
-                    //     setElementChoice(label)
-                    //     console.log(label);
-                    //   }}
+                  
                   />
                 </div>
 
-                {elementChoice !== "Finished" && (
+                {elementChoice !== "Finished" && elementChoice !== "Welcome"&& elementChoice !== "Description" && (
                   <div
                     style={{
                       marginTop: "8px",
@@ -269,6 +326,8 @@ export default function AdminElements({ inputElements, setInputElements ,setOpen
                       id="outlined-required"
                       label="Column's Name"
                       value={elementName}
+                      error={elementName === ""}
+                      helperText={elementName === "" ? 'Required' : ' '}
                       onChange={(e) => {
                         setElementName(e.target.value);
                       }}
@@ -291,6 +350,8 @@ export default function AdminElements({ inputElements, setInputElements ,setOpen
                       multiline
                       rows={4}
                       value={questionText}
+                      error={questionText === ""}
+                      helperText={questionText === "" ? 'Required' : ' '}
                       //   onChange={handleChange}
                       onChange={(e) => {
                         setQuestionText(e.target.value);
@@ -299,7 +360,7 @@ export default function AdminElements({ inputElements, setInputElements ,setOpen
                     />
                   </div>
                 )}
-                {elementChoice !== "Welcome" && elementChoice !== "Finished" && (
+                {elementChoice !== "Welcome" && elementChoice !== "Finished" && elementChoice !==  "Description" &&(
                   <div
                     style={{
                       marginTop: "8px",
@@ -315,6 +376,8 @@ export default function AdminElements({ inputElements, setInputElements ,setOpen
                       rows={4}
                       value={questionText}
                       //   onChange={handleChange}
+                      error={questionText === ""}
+                      helperText={questionText === "" ? 'Required' : ' '}
                       onChange={(e) => {
                         setQuestionText(e.target.value);
                       }}
@@ -337,6 +400,33 @@ export default function AdminElements({ inputElements, setInputElements ,setOpen
                       multiline
                       rows={4}
                       value={questionText}
+                      error={questionText === ""}
+                      helperText={questionText === "" ? 'Required' : ' '}
+                      //   onChange={handleChange}
+                      onChange={(e) => {
+                        setQuestionText(e.target.value);
+                      }}
+                      fullWidth
+                    />
+                  </div>
+                )}
+                    {elementChoice == "Description" && (
+                  <div
+                    style={{
+                      marginTop: "8px",
+                      marginBottom: "8px",
+                      marginRight: "8px",
+                      marginLeft: "8px",
+                    }}
+                  >
+                    <TextField
+                      id="outlined-multiline-flexible"
+                      label="Description Text"
+                      multiline
+                      rows={4}
+                      value={questionText}
+                      error={questionText === ""}
+                      helperText={questionText === "" ? 'Required' : ' '}
                       //   onChange={handleChange}
                       onChange={(e) => {
                         setQuestionText(e.target.value);
@@ -361,6 +451,8 @@ export default function AdminElements({ inputElements, setInputElements ,setOpen
                       id="outlined-required"
                       label="options"
                       value={elementOption}
+                      error={elementOption === ""}
+                      helperText={elementOption === "" ? 'Required' : ' '}
                       onChange={(e) => {
                         setElementOption(e.target.value);
                       }}
@@ -413,6 +505,7 @@ export default function AdminElements({ inputElements, setInputElements ,setOpen
                       <FormControlLabel
                         control={
                           <Switch
+
                             checked={state.gilad}
                             onChange={handleChange}
                             name="required"
@@ -530,5 +623,6 @@ const inputElementOption = [
   { stepId: "10", label: "Country" },
   { stepId: "11", label: "Password" },
   { stepId: "12", label: "Number" },
-  { stepId: "13", label: "Finished" },
+  { stepId: "14", label: "Description" },
+  // { stepId: "13", label: "Finished" },
 ];

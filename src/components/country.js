@@ -53,9 +53,9 @@ const useStyles = makeStyles((theme) => ({
 export default function Country({ setStep, setPayload, payload,elementindex,setElementindex ,inputElements}) {
   const classes = useStyles();
   const [submitted, setSubmitted] = useState(false);
-  const nextStep = () => {
-    setStep("second");
-  };
+  const [eValue, setEValue] = React.useState();
+
+  
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -98,6 +98,9 @@ export default function Country({ setStep, setPayload, payload,elementindex,setE
       sx={{ width: 300 }}
       options={countries}
       autoHighlight
+      onChange={(event, value) => {
+        setEValue(value.label);
+      }}
       getOptionLabel={(option) => option.label}
       renderOption={(props, option) => (
         <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
@@ -130,6 +133,13 @@ export default function Country({ setStep, setPayload, payload,elementindex,setE
                 disabled={submitted}
                 className={classes.submit}
                 onClick={() => {
+                  setPayload({
+                    ...payload,
+                   
+                    [inputElements[elementindex].elementName] :eValue,
+                     
+                  }
+                  );
                   setElementindex(elementindex+1)
                 }}
               >

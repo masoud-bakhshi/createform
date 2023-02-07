@@ -22,6 +22,9 @@ import Number from "../number"
 import Email from "../email";
 import Phone from "../phone"
 import Finished from "../finished";
+import Description from "../description"
+import SaveForm from "../saveForm"
+
 import { useLocation } from "react-router-dom";
 import { useParams } from 'react-router-dom';
 import Axios from "axios";
@@ -99,12 +102,7 @@ console.log(id);
     //   ];
       const [elementindex, setElementindex] = useState(0)
   // var elementindex=0;
-    const [payload, setPayload] = useState({
-      appname: "",
-      description: "",
-      analytics: "true",
-      username: username,
-    });
+    const [payload, setPayload] = useState({});
   
     useEffect(() => {
       if (step === "finish" & inputElements) {
@@ -150,7 +148,30 @@ console.log(id);
             ></Welcome>
           
           )}
-  
+             {step === "Description" && (
+            
+            <Description
+              setStep={setStep}
+              payload={payload}
+              setPayload={setPayload}
+              elementindex={elementindex}
+              inputElements={inputElements}
+               setElementindex ={setElementindex}
+            ></Description>
+          
+          )}
+     {step === "SaveForm" && (
+            
+            <SaveForm
+              setStep={setStep}
+              payload={payload}
+              setPayload={setPayload}
+              elementindex={elementindex}
+              inputElements={inputElements}
+               setElementindex ={setElementindex}
+            ></SaveForm>
+          
+          )}
           {step === "TextFieldStep" && (
             
             <TextFieldStep

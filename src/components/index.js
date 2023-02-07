@@ -1,19 +1,12 @@
 import React, { useState,useEffect } from "react";
 import Axios from "axios";
 import makeStyles from "@mui/styles/makeStyles";
-import TextField from "@mui/material/TextField";
-import Slide from "@mui/material/Slide";
 import EndUserElements from "./endUserElements";
-import { Button, CssBaseline, Paper, Grid, Typography } from "@mui/material";
+import { Button } from "@mui/material";
 import AdminElementsDialog from "./adminElementsDialog";
-import Box from "@mui/material/Box";
 // import Button from '@mui/material/Button';
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import TreeView from "@mui/lab/TreeView";
-import TreeItem from "@mui/lab/TreeItem";
-import { Route, Switch, Redirect, useHistory } from "react-router-dom";
-import DataTableDialog from "./table";
+import { useHistory } from "react-router-dom";
+// import DataTableDialog from "./table";
 import FormTree from "./formTree/index.js"
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -143,10 +136,9 @@ getuserFormJsonsTree("masoud.main@gmail.com")
   return (
     <div>
       <div dir="center" className={classes.halfTop}>
-        <h1>
-          first Step Add Page then you can see output in Forms Tree(do step by
-          step)
-        </h1>
+        {/* <h1>
+        The first step is to create a form, and then you can send the form's link to anyone.
+        </h1> */}
 
         {/* <Button
     type="button"
@@ -189,10 +181,7 @@ getuserFormJsonsTree("masoud.main@gmail.com")
                   inputElements={inputElements}
                   setInputElements={setInputElements}
                 ></AdminElementsDialog>
-                <DataTableDialog   open={openTable}
-                  setOpen={setOpenTable}
-                  tabData={tabData}
-                ></DataTableDialog>
+              
     </div>
   );
 }

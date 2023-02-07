@@ -51,6 +51,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Email({ setStep, setPayload, payload,elementindex,setElementindex,inputElements }) {
   const classes = useStyles();
   const [submitted, setSubmitted] = useState(false);
+  const [eValue, setEValue] = useState("");
 
 
   return (
@@ -96,6 +97,10 @@ export default function Email({ setStep, setPayload, payload,elementindex,setEle
           id="outlined-required"
           label="Email"
         //   defaultValue="Hello World"
+        value={eValue}
+                onChange={(e) => {
+                  setEValue(e.target.value);
+                }}
           fullWidth
         />
               <Button
@@ -106,6 +111,13 @@ export default function Email({ setStep, setPayload, payload,elementindex,setEle
                 disabled={submitted}
                 className={classes.submit}
                 onClick={() => {
+                  setPayload({
+                    ...payload,
+                   
+                    [inputElements[elementindex].elementName] :eValue,
+                     
+                  }
+                  );
                   setElementindex(elementindex+1)
                 }}
               >

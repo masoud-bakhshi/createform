@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import makeStyles from '@mui/styles/makeStyles';
+import makeStyles from "@mui/styles/makeStyles";
 import Dialog from "@mui/material/Dialog";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import CloseIcon from "@mui/icons-material/Close";
-import Slide from '@mui/material/Slide';
+import Slide from "@mui/material/Slide";
 // import Slide from "@mui/material/Slide";
 import TextFieldStep from "./textFieldStep";
 import SwitchStep from "./switchStep";
@@ -14,14 +14,16 @@ import MultiTextFieldStep from "./multiTextFieldStep";
 import RadioStep from "./radioStep";
 import CheckboxStep from "./checkboxStep";
 import AutocompleteStep from "./autocompleteStep";
-import Welcome from "./welcome"
-import DatePickerStep from "./datePickerStep"
+import Welcome from "./welcome";
+import DatePickerStep from "./datePickerStep";
 import Country from "./country";
 import Password from "./password";
-import Number from "./number"
+import Number from "./number";
 import Email from "./email";
-import Phone from "./phone"
+import Phone from "./phone";
 import Finished from "./finished";
+import Description from "./description";
+import SaveForm from "./saveForm";
 const useStyles = makeStyles((theme) => ({
   appBar: {
     position: "fixed",
@@ -36,8 +38,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="left" ref={ref} {...props} />;
 });
 
-const EndUserElements = ({open , setOpen , inputElements}) => {
-  const username="masoud.main@gmail.com"
+const EndUserElements = ({ open, setOpen, inputElements }) => {
+  const username = "masoud.main@gmail.com";
   const [restApp, setResetApp] = useState(true);
   //*********************************** */
   const classes = useStyles();
@@ -55,11 +57,11 @@ const EndUserElements = ({open , setOpen , inputElements}) => {
   //    {stepId:"10", step:"Country", questionText:"Question's Text"} ,
   //    {stepId:"11", step:"Password", questionText:"Question's Text"} ,
   //    {stepId:"12", step:"Number", questionText:"Question's Text"} ,
-  //    {stepId:"13", step:"Phone", questionText:"Question's Text"} 
-     
+  //    {stepId:"13", step:"Phone", questionText:"Question's Text"}
+
   //   ];
-    const [elementindex, setElementindex] = useState(0)
-// var elementindex=0;
+  const [elementindex, setElementindex] = useState(0);
+  // var elementindex=0;
   const [payload, setPayload] = useState({
     appname: "",
     description: "",
@@ -74,19 +76,15 @@ const EndUserElements = ({open , setOpen , inputElements}) => {
       setResetApp(true);
       setOpen(false);
       setStep("Welcome");
-     
-     
     }
- 
   }, [step]);
 
   useEffect(() => {
-    setStep(inputElements[elementindex].step)
- 
+    setStep(inputElements[elementindex].step);
   }, [elementindex]);
   return (
     <div>
-        <Dialog
+      <Dialog
         fullScreen
         open={open}
         onClose={handleClose}
@@ -99,186 +97,192 @@ const EndUserElements = ({open , setOpen , inputElements}) => {
               color="inherit"
               onClick={handleClose}
               aria-label="close"
-              size="large">
+              size="large"
+            >
               <CloseIcon />
             </IconButton>
-           
-       <Typography variant="h6" className={classes.title}>
-        Link of your Forms: http://www.devcodebase.com/forms/53sef3sef4sf4s8f43s4fs3f
-      </Typography>
-   
+
+            <Typography variant="h6" className={classes.title}>
+              Link of your Forms:
+              http://www.devcodebase.com/forms/53sef3sef4sf4s8f43s4fs3f
+            </Typography>
           </Toolbar>
         </AppBar>
-        <div style={{
+        <div
+          style={{
             marginTop: "5px",
             marginBottom: "5px",
             marginRight: "5px",
             marginLeft: "5px",
-          }}>
-             {step === "Welcome" && (
-          
-          <Welcome
-            setStep={setStep}
-            payload={payload}
-            setPayload={setPayload}
-            elementindex={elementindex}
-            inputElements={inputElements}
-             setElementindex ={setElementindex}
-          ></Welcome>
-        
-        )}
+          }}
+        >
+          {step === "Welcome" && (
+            <Welcome
+              setStep={setStep}
+              payload={payload}
+              setPayload={setPayload}
+              elementindex={elementindex}
+              inputElements={inputElements}
+              setElementindex={setElementindex}
+            ></Welcome>
+          )}
 
-        {step === "TextFieldStep" && (
-          
-          <TextFieldStep
-            setStep={setStep}
-            payload={payload}
-            setPayload={setPayload}
-            elementindex={elementindex}
-            inputElements={inputElements}
-            setElementindex ={setElementindex}
-
-          ></TextFieldStep>
-        
-        )}
-        {step === "SwitchStep" && (
-          <SwitchStep
-            setStep={setStep}
-            setPayload={setPayload}
-            payload={payload}
-            elementindex={elementindex}
-            inputElements={inputElements}
-            setElementindex ={setElementindex}
-
-          ></SwitchStep>
-        )}
-      {step === "MultiTextFieldStep" && (
-          <MultiTextFieldStep
-            setStep={setStep}
-            setPayload={setPayload}
-            payload={payload}
-            elementindex={elementindex}
-            inputElements={inputElements}
-            setElementindex ={setElementindex}
-
-          ></MultiTextFieldStep>
-        )}
-            {step === "RadioStep" && (
-          <RadioStep
-            setStep={setStep}
-            setPayload={setPayload}
-            payload={payload}
-            elementindex={elementindex}
-            inputElements={inputElements}
-            setElementindex ={setElementindex}
-
-          ></RadioStep>
-        )}
+          {step === "Description" && (
+            <Description
+              setStep={setStep}
+              payload={payload}
+              setPayload={setPayload}
+              elementindex={elementindex}
+              inputElements={inputElements}
+              setElementindex={setElementindex}
+            ></Description>
+          )}
+   {step === "SaveForm" && (
+            <SaveForm
+              setStep={setStep}
+              payload={payload}
+              setPayload={setPayload}
+              elementindex={elementindex}
+              inputElements={inputElements}
+              setElementindex={setElementindex}
+            ></SaveForm>
+          )}
+          {step === "TextFieldStep" && (
+            <TextFieldStep
+              setStep={setStep}
+              payload={payload}
+              setPayload={setPayload}
+              elementindex={elementindex}
+              inputElements={inputElements}
+              setElementindex={setElementindex}
+            ></TextFieldStep>
+          )}
+          {step === "SwitchStep" && (
+            <SwitchStep
+              setStep={setStep}
+              setPayload={setPayload}
+              payload={payload}
+              elementindex={elementindex}
+              inputElements={inputElements}
+              setElementindex={setElementindex}
+            ></SwitchStep>
+          )}
+          {step === "MultiTextFieldStep" && (
+            <MultiTextFieldStep
+              setStep={setStep}
+              setPayload={setPayload}
+              payload={payload}
+              elementindex={elementindex}
+              inputElements={inputElements}
+              setElementindex={setElementindex}
+            ></MultiTextFieldStep>
+          )}
+          {step === "RadioStep" && (
+            <RadioStep
+              setStep={setStep}
+              setPayload={setPayload}
+              payload={payload}
+              elementindex={elementindex}
+              inputElements={inputElements}
+              setElementindex={setElementindex}
+            ></RadioStep>
+          )}
           {step === "CheckboxStep" && (
-          <CheckboxStep
-            setStep={setStep}
-            setPayload={setPayload}
-            payload={payload}
-            elementindex={elementindex}
-            inputElements={inputElements}
-            setElementindex ={setElementindex}
+            <CheckboxStep
+              setStep={setStep}
+              setPayload={setPayload}
+              payload={payload}
+              elementindex={elementindex}
+              inputElements={inputElements}
+              setElementindex={setElementindex}
+            ></CheckboxStep>
+          )}
 
-          ></CheckboxStep>
-        )}
-  
-               {step === "AutocompleteStep" && (
-          <AutocompleteStep
-            setStep={setStep}
-            setPayload={setPayload}
-            payload={payload}
-            elementindex={elementindex}
-            inputElements={inputElements}
-            setElementindex ={setElementindex}
+          {step === "AutocompleteStep" && (
+            <AutocompleteStep
+              setStep={setStep}
+              setPayload={setPayload}
+              payload={payload}
+              elementindex={elementindex}
+              inputElements={inputElements}
+              setElementindex={setElementindex}
+            ></AutocompleteStep>
+          )}
 
-          ></AutocompleteStep>
-        )}
-        
-        {step === "DatePickerStep" && (
-          <DatePickerStep
-            setStep={setStep}
-            setPayload={setPayload}
-            payload={payload}
-            elementindex={elementindex}
-            inputElements={inputElements}
-            setElementindex ={setElementindex}
-
-          ></DatePickerStep>
-        )}
-           {step === "Country" && (
-          <Country
-            setStep={setStep}
-            setPayload={setPayload}
-            payload={payload}
-            elementindex={elementindex}
-            inputElements={inputElements}
-            setElementindex ={setElementindex}
-
-          ></Country>
-        )}
-           {step === "Password" && (
-          <Password
-            setStep={setStep}
-            setPayload={setPayload}
-            payload={payload}
-            elementindex={elementindex}
-            inputElements={inputElements}
-            setElementindex ={setElementindex}
-
-          ></Password>
-        )}
-         {step === "Number" && (
-          <Number
-            setStep={setStep}
-            setPayload={setPayload}
-            payload={payload}
-            elementindex={elementindex}
-            inputElements={inputElements}
-            setElementindex ={setElementindex}
-
-          ></Number>
-        )}
+          {step === "DatePickerStep" && (
+            <DatePickerStep
+              setStep={setStep}
+              setPayload={setPayload}
+              payload={payload}
+              elementindex={elementindex}
+              inputElements={inputElements}
+              setElementindex={setElementindex}
+            ></DatePickerStep>
+          )}
+          {step === "Country" && (
+            <Country
+              setStep={setStep}
+              setPayload={setPayload}
+              payload={payload}
+              elementindex={elementindex}
+              inputElements={inputElements}
+              setElementindex={setElementindex}
+            ></Country>
+          )}
+          {step === "Password" && (
+            <Password
+              setStep={setStep}
+              setPayload={setPayload}
+              payload={payload}
+              elementindex={elementindex}
+              inputElements={inputElements}
+              setElementindex={setElementindex}
+            ></Password>
+          )}
+          {step === "Number" && (
+            <Number
+              setStep={setStep}
+              setPayload={setPayload}
+              payload={payload}
+              elementindex={elementindex}
+              inputElements={inputElements}
+              setElementindex={setElementindex}
+            ></Number>
+          )}
           {step === "Email" && (
-          <Email
-            setStep={setStep}
-            setPayload={setPayload}
-            payload={payload}
-            elementindex={elementindex}
-            inputElements={inputElements}
-            setElementindex ={setElementindex}
-
-          ></Email>
-        )}
-         {step === "Phone" && (
-          <Phone
-            setStep={setStep}
-            setPayload={setPayload}
-            payload={payload}
-            elementindex={elementindex}
-            inputElements={inputElements}
-            setElementindex ={setElementindex}
-
-          ></Phone>
-        )}
-         {step === "Finished" && (
-          <Finished
-            setStep={setStep}
-            setPayload={setPayload}
-            payload={payload}
-            elementindex={elementindex}
-            inputElements={inputElements}
-            setElementindex ={setElementindex}
-
-          ></Finished>
-        )}
+            <Email
+              setStep={setStep}
+              setPayload={setPayload}
+              payload={payload}
+              elementindex={elementindex}
+              inputElements={inputElements}
+              setElementindex={setElementindex}
+            ></Email>
+          )}
+          {step === "Phone" && (
+            <Phone
+              setStep={setStep}
+              setPayload={setPayload}
+              payload={payload}
+              elementindex={elementindex}
+              inputElements={inputElements}
+              setElementindex={setElementindex}
+            ></Phone>
+          )}
+          {step === "Finished" && (
+            <Finished
+              setStep={setStep}
+              setPayload={setPayload}
+              payload={payload}
+              elementindex={elementindex}
+              inputElements={inputElements}
+              setElementindex={setElementindex}
+            ></Finished>
+          )}
         </div>
       </Dialog>
     </div>
-  )
-}
+  );
+};
 
-export default EndUserElements
+export default EndUserElements;
