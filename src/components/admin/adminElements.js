@@ -74,7 +74,8 @@ export default function AdminElements({ inputElements, setInputElements ,setOpen
   const [elementChoice, setElementChoice] = useState("Welcome");
   const [formName, setFormName] = useState();
   const [saveFormState, setSaveFormState] = useState(false);
-
+  const [languageChoice, setLanguageChoice] = useState("English");
+  
   // setElementindex(elementindex+1)
 
   //   const [inputElements, setInputElements] = useState([
@@ -260,6 +261,33 @@ export default function AdminElements({ inputElements, setInputElements ,setOpen
                   marginLeft: "8px",
                 }}
               >
+                  <div
+                  style={{
+                    marginTop: "8px",
+                    marginBottom: "8px",
+                    marginRight: "8px",
+                    marginLeft: "8px",
+                  }}
+                >
+                  <Autocomplete
+                    disablePortal
+                    id="combo-box-demo"
+                    options={inputLanguageOption}
+                    sx={{ width: 300 }}
+                    renderInput={(params) => (
+                      <TextField {...params} label="Language" />
+                    )}
+                    defaultValue="English"
+                    error={languageChoice === ""}
+                    helperText={languageChoice === "" ? 'Required' : ' '}
+
+                    onChange={(event, value) => {
+                      setLanguageChoice(value.label);
+                    }}
+                  
+                  />
+                </div>
+
                 <div
                     style={{
                       marginTop: "8px",
@@ -607,6 +635,11 @@ export default function AdminElements({ inputElements, setInputElements ,setOpen
     </Grid>
   );
 }
+const inputLanguageOption = [
+  { id: "en", label: "English" },
+  { id: "fa", label: "فارسی" },
+  { id: "ar", label: "العربية" },
+]
 const inputElementOption = [
   { stepId: "0", label: "Welcome" },
   { stepId: "1", label: "Email" },

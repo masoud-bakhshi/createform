@@ -5,8 +5,11 @@ import TextField from '@mui/material/TextField';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import dateIohijri from 'https://cdn.jsdelivr.net/npm/@date-io/hijri@2.16.1/+esm'
 import Stack from '@mui/material/Stack';
 import Slide from '@mui/material/Slide';
+// import AdapterJalali from "@date-io/date-fns-jalali";
+import dateIodateFnsJalali from 'https://cdn.jsdelivr.net/npm/@date-io/date-fns-jalali@2.16.0/+esm'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -51,6 +54,7 @@ const useStyles = makeStyles((theme) => ({
     color: "#000",
   },
 }));
+// jMoment.loadPersian({ dialect: "persian-modern", usePersianDigits: true });
 
 export default function DatePickerStep({ setStep, setPayload, payload,elementindex,setElementindex,inputElements }) {
   const classes = useStyles();
@@ -92,22 +96,55 @@ export default function DatePickerStep({ setStep, setPayload, payload,elementind
             marginRight: "5px",
             marginLeft: "5px",
           }}>
-        
-        <LocalizationProvider dateAdapter={AdapterDateFns}>
-      <Stack spacing={3}>
-             <DatePicker
-          disableFuture
-          label="Responsive"
-          openTo="year"
-          views={['year', 'month', 'day']}
-          value={value}
-          onChange={(newValue) => {
-            setValue(newValue);
-          }}
-          renderInput={(params) => <TextField {...params} />}
-        />
-      </Stack>
-    </LocalizationProvider>
+         {/* <LocalizationProvider dateAdapter={AdapterDateFns} >
+     <Stack spacing={3}>
+                  <DatePicker
+                  openTo="year"
+                  views={['year', 'month', 'day']}
+                    mask="____/__/__"
+                    value={value}
+                    onChange={(newValue) => {
+                      setValue(newValue);
+                    }}
+                    renderInput={(params) => <TextField {...params} />}
+                    minDate="1980-03-14"
+                    maxDate="2050-11-26"
+                  />
+                  </Stack>
+                </LocalizationProvider>
+                <LocalizationProvider dateAdapter={dateIohijri} >
+     <Stack spacing={3}>
+                  <DatePicker
+                  openTo="year"
+                  views={['year', 'month', 'day']}
+                    mask="____/__/__"
+                    value={value}
+                    onChange={(newValue) => {
+                      setValue(newValue);
+                    }}
+                    renderInput={(params) => <TextField {...params} />}
+                    minDate="1980-03-14"
+                    maxDate="2050-11-26"
+                  />
+                  </Stack>
+                </LocalizationProvider> */}
+     
+     <LocalizationProvider dateAdapter={dateIodateFnsJalali} >
+     <Stack spacing={3}>
+                  <DatePicker
+                  openTo="year"
+                  views={['year', 'month', 'day']}
+                    mask="____/__/__"
+                    value={value}
+                    onChange={(newValue) => {
+                      setValue(newValue);
+                    }}
+                    renderInput={(params) => <TextField {...params} />}
+                    minDate="1980-03-14"
+                    maxDate="2050-11-26"
+                  />
+                  </Stack>
+                </LocalizationProvider>
               <Button
                 type="button"
                 fullWidth
